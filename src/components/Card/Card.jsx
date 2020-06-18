@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './Card.css';
 import avatar from './logo.png';
 
 
 const Card = ({ joke, loading, errorMsg }) => {
-    const [speed, setSpeed] = useState(3);
-
+    const speed = 3;
     const animation = loading ? `spin ${speed}s linear infinite` : ``;
 
     return (
