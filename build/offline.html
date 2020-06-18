@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="./logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chucky-Offline</title>
+
+    <style type="text/css">
+        * { 
+            overflow: hidden; 
+        } 
+
+        html {
+            height: 100%;
+        }
+
+        h1{
+            color: #f18b0b;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <h1>You are offline! Please go online to check out Chucky.</h1>
+    <canvas id="canvas">
+    </canvas> 
+    <script>
+    window.addEventListener('load', ()=>{ 
+        resize(); 
+        document.addEventListener('mousedown', startPainting); 
+        document.addEventListener('mouseup', stopPainting); 
+        document.addEventListener('mousemove', sketch); 
+        window.addEventListener('resize', resize); 
+    }); 
+        
+    const canvas = document.querySelector('#canvas'); 
+       
+    const ctx = canvas.getContext('2d'); 
+        
+    function resize(){ 
+      ctx.canvas.width = window.innerWidth; 
+      ctx.canvas.height = window.innerHeight; 
+    } 
+        
+    let coord = {x:0 , y:0};  
+    let paint = false; 
+        
+    function getPosition(event){ 
+      coord.x = event.clientX - canvas.offsetLeft; 
+      coord.y = event.clientY - canvas.offsetTop; 
+    } 
+      
+    function startPainting(event){ 
+      paint = true; 
+      getPosition(event); 
+    } 
+    function stopPainting(){ 
+      paint = false; 
+    } 
+        
+    function sketch(event){ 
+      if (!paint) return; 
+      ctx.beginPath(); 
+        
+      ctx.lineWidth = 5; 
+      ctx.lineCap = 'round'; 
+      ctx.strokeStyle = '#f18b0b'; 
+          
+      ctx.moveTo(coord.x, coord.y); 
+       
+      getPosition(event); 
+       
+      ctx.lineTo(coord.x , coord.y); 
+        
+      ctx.stroke(); 
+    } 
+    </script>
+</body>
+</html>
